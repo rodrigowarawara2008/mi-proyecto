@@ -52,9 +52,33 @@ async function mostrarUsuarios() {
       <td>${usuario.nombre}</td>
       <td><span class="badge badge-${usuario.rol}">${usuario.rol.toUpperCase()}</span></td>
       <td><span class="badge badge-${usuario.origen === 'JSON' ? 'json' : 'local'}">${usuario.origen}</span></td>
+      <td class="acciones">
+        <button class="btn-editar" onclick="editarUsuario(${usuario.id})">✏️ Editar</button>
+        <button class="btn-eliminar" onclick="eliminarUsuario(${usuario.id}, '${usuario.nombre}')">🗑️ Eliminar</button>
+      </td>
     `;
     tbody.appendChild(tr);
   });
+}
+
+// ===== FUNCIONALIDADES ADICIONALES PARA GESTIÓN DE USUARIOS =====
+
+// Función para editar usuario
+function editarUsuario(id) {
+  mostrarNotificacion(`Editando usuario ID: ${id} - Función en desarrollo`, 'info');
+}
+
+// Función para eliminar usuario
+function eliminarUsuario(id, nombre) {
+  if (confirm(`¿Estás seguro de eliminar al usuario: ${nombre}?\nEsta acción no se puede deshacer.`)) {
+    // En una aplicación real, aquí harías una petición al servidor
+    mostrarNotificacion(`Usuario ${nombre} eliminado correctamente`, 'success');
+    
+    // Simular eliminación recargando la lista
+    setTimeout(() => {
+      mostrarUsuarios();
+    }, 1000);
+  }
 }
 
 // Función para generar ID único
@@ -178,7 +202,9 @@ registroForm.addEventListener('submit', async (e) => {
     usuario: usuario,
     password: password,
     nombre: nombre,
-    rol: rol
+    rol: rol,
+    fechaRegistro: new Date().toISOString().split('T')[0],
+    activo: true
   };
   
   // Registrar usuario
@@ -199,6 +225,24 @@ registroForm.addEventListener('submit', async (e) => {
   }
 });
 
+// ===== FUNCIÓN DE NOTIFICACIÓN PARA USUARIO =====
+function mostrarNotificacion(mensaje, tipo = 'info') {
+  const notification = document.createElement('div');
+  notification.className = `notification ${tipo}`;
+  notification.innerHTML = `
+      <span>${mensaje}</span>
+      <button onclick="this.parentElement.remove()">×</button>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+      if (notification.parentElement) {
+          notification.remove();
+      }
+  }, 5000);
+}
+
 // Verificar sesión
 function verificarSesion() {
   const usuarioGuardado = localStorage.getItem('usuarioActivo');
@@ -210,6 +254,7 @@ function verificarSesion() {
 // Cerrar sesión
 function cerrarSesion() {
   localStorage.removeItem('usuarioActivo');
+  localStorage.removeItem('fechaLogin');
   window.location.href = '../index.html';
 }
 

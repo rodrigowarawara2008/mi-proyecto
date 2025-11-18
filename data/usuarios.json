@@ -5,21 +5,30 @@
       "usuario": "admin",
       "password": "admin123",
       "nombre": "Administrador",
-      "rol": "admin"
+      "email": "admin@sistema.com",
+      "rol": "admin",
+      "fechaRegistro": "2024-01-01",
+      "activo": true
     },
     {
       "id": 2,
       "usuario": "usuario1",
       "password": "pass123",
       "nombre": "Juan Pérez",
-      "rol": "usuario"
+      "email": "juan@email.com",
+      "rol": "usuario",
+      "fechaRegistro": "2024-01-02",
+      "activo": true
     },
     {
       "id": 3,
       "usuario": "maria",
       "password": "maria456",
       "nombre": "María García",
-      "rol": "usuario"
+      "email": "maria@email.com",
+      "rol": "usuario",
+      "fechaRegistro": "2024-01-03",
+      "activo": true
     }
   ]
 }

@@ -108,7 +108,9 @@ document.getElementById('registroForm').addEventListener('submit', async (e) => 
     usuario: usuario,
     password: password,
     nombre: nombre,
-    rol: rol
+    rol: rol,
+    fechaRegistro: new Date().toISOString().split('T')[0],
+    activo: true
   };
 
   // Registrar usuario

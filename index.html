@@ -8,32 +8,83 @@
   <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-  <div class="container">
-    <div class="login-box">
-      <h1>🔐 Inicio de Sesión</h1>
-      
-      <form id="loginForm">
-        <div class="input-group">
-          <label for="usuario">Usuario</label>
-          <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
+  <div class="login-container">
+    <!-- Partícula decorativa -->
+    <div class="particle"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    
+    <div class="login-card">
+      <!-- Header con logo -->
+      <div class="login-header">
+        <div class="logo">
+          <span class="logo-icon">🔐</span>
+          <h1>Inicio de Sesión</h1>
         </div>
-        
-        <div class="input-group">
-          <label for="password">Contraseña</label>
-          <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+        <p class="welcome-text">Bienvenido de vuelta</p>
+      </div>
+
+      <!-- Formulario -->
+      <form id="loginForm" class="login-form">
+        <!-- Campo Usuario -->
+        <div class="form-group">
+          <div class="input-container">
+            <span class="input-icon">👤</span>
+            <input 
+              type="text" 
+              id="usuario" 
+              name="usuario" 
+              placeholder="Ingresa tu usuario"
+              class="modern-input"
+              required
+            >
+          </div>
         </div>
-        
-        <button type="submit">Iniciar Sesión</button>
-        
+
+        <!-- Campo Contraseña -->
+        <div class="form-group">
+          <div class="input-container">
+            <span class="input-icon">🔒</span>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="Ingresa tu contraseña"
+              class="modern-input"
+              required
+            >
+          </div>
+        </div>
+
+        <!-- Botón de envío -->
+        <button type="submit" class="submit-btn">
+          <span class="btn-text">Iniciar Sesión</span>
+          <span class="btn-icon">→</span>
+        </button>
+
+        <!-- Mensajes -->
         <div id="mensaje" class="mensaje"></div>
       </form>
-      
-      <div class="registro-link">
-        <p>¿No tienes cuenta? <a href="page/registro.html">Regístrate aquí</a></p>
+
+      <!-- Enlaces adicionales -->
+      <div class="login-links">
+        <div class="link-group">
+          <span>¿No tienes cuenta?</span>
+          <a href="page/registro.html" class="link">Regístrate aquí</a>
+        </div>
+        <div class="link-separator">•</div>
+        <div class="link-group">
+          <a href="#" id="olvidoPassword" class="link">¿Olvidaste tu contraseña?</a>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="login-footer">
+        <p>Sistema de Gestión de Usuarios</p>
       </div>
     </div>
   </div>
-  
+
   <script src="js/main.js"></script>
 </body>
 </html>
