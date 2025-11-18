@@ -39,11 +39,6 @@ function validarEmail(email) {
     return regex.test(email);
 }
 
-// Validación de nombre
-function validarNombre(nombre) {
-    return nombre.length >= 2 && /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre);
-}
-
 // ===== FUNCIONES ORIGINALES MEJORADAS =====
 
 // Cargar usuarios del JSON y localStorage
@@ -85,13 +80,9 @@ function mostrarMensaje(texto, tipo) {
 async function validarLogin(usuario, password) {
   const usuarios = await cargarUsuarios();
   
-  // Hashear la contraseña ingresada para comparar
-  const passwordHash = hashPassword(password);
-  
   const usuarioEncontrado = usuarios.find(u => 
     u.usuario === usuario && 
-    u.password === password // En producción, comparar con hash
-    // u.password === passwordHash // Para usar hashing
+    u.password === password
   );
   
   return usuarioEncontrado;
@@ -112,16 +103,16 @@ loginForm.addEventListener('submit', async (e) => {
   
   // Mostrar estado de carga en el botón
   const button = loginForm.querySelector('.submit-btn');
-  const originalContent = button.innerHTML;
+  const originalText = button.textContent;
   button.classList.add('loading');
-  button.innerHTML = '<div class="loader"></div>';
+  button.textContent = 'Cargando...';
   button.disabled = true;
   
   const usuarioValido = await validarLogin(usuario, password);
   
   // Restaurar botón
   button.classList.remove('loading');
-  button.innerHTML = originalContent;
+  button.textContent = originalText;
   button.disabled = false;
   
   if (usuarioValido) {
