@@ -8,15 +8,18 @@ const registroForm = document.getElementById('registroForm');
 // Cargar todos los usuarios
 async function cargarTodosUsuarios() {
   try {
+    // Cargar usuarios del JSON
     const response = await fetch('../data/usuarios.json');
     const data = await response.json();
     let usuarios = data.usuarios.map(u => ({...u, origen: 'JSON'}));
-
+    
+    // Cargar usuarios de localStorage
     const usuariosLocal = localStorage.getItem('usuariosAdicionales');
     if (usuariosLocal) {
       const usuariosAdicionales = JSON.parse(usuariosLocal).map(u => ({...u, origen: 'LocalStorage'}));
       usuarios = [...usuarios, ...usuariosAdicionales];
     }
+    
     return usuarios;
   } catch (error) {
     console.error('Error al cargar usuarios:', error);
@@ -28,16 +31,19 @@ async function cargarTodosUsuarios() {
 async function mostrarUsuarios() {
   const usuarios = await cargarTodosUsuarios();
   const tbody = document.getElementById('tablaUsuariosBody');
+  
   tbody.innerHTML = '';
-
+  
+  // Calcular estadísticas
   const totalUsuarios = usuarios.length;
   const totalAdmins = usuarios.filter(u => u.rol === 'admin').length;
   const totalRegulares = usuarios.filter(u => u.rol === 'usuario').length;
-
+  
   document.getElementById('totalUsuarios').textContent = totalUsuarios;
   document.getElementById('totalAdmins').textContent = totalAdmins;
   document.getElementById('totalRegulares').textContent = totalRegulares;
-
+  
+  // Llenar tabla
   usuarios.forEach(usuario => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -73,7 +79,8 @@ function mostrarMensaje(texto, tipo) {
   const mensajeDiv = document.getElementById('mensaje');
   mensajeDiv.textContent = texto;
   mensajeDiv.className = `mensaje ${tipo}`;
-  mensajeDiv.style.display = 'block';
+  
+  // Ocultar mensaje después de 5 segundos
   setTimeout(() => {
     mensajeDiv.style.display = 'none';
   }, 5000);
@@ -84,12 +91,14 @@ async function registrarUsuario(datosUsuario) {
   try {
     let usuariosAdicionales = [];
     const usuariosLocal = localStorage.getItem('usuariosAdicionales');
+    
     if (usuariosLocal) {
       usuariosAdicionales = JSON.parse(usuariosLocal);
     }
-
+    
     usuariosAdicionales.push(datosUsuario);
     localStorage.setItem('usuariosAdicionales', JSON.stringify(usuariosAdicionales));
+    
     return true;
   } catch (error) {
     console.error('Error al registrar usuario:', error);
@@ -100,7 +109,7 @@ async function registrarUsuario(datosUsuario) {
 // Abrir modal
 function abrirModal() {
   modal.style.display = 'block';
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden'; // Prevenir scroll del body
 }
 
 // Cerrar modal
@@ -108,8 +117,7 @@ function cerrarModal() {
   modal.style.display = 'none';
   document.body.style.overflow = 'auto';
   registroForm.reset();
-  const msg = document.getElementById('mensaje');
-  if (msg) msg.style.display = 'none';
+  document.getElementById('mensaje').style.display = 'none';
 }
 
 // Event Listeners del modal
@@ -134,32 +142,37 @@ document.addEventListener('keydown', (e) => {
 // Manejo del formulario de registro
 registroForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-
+  
   const nombre = document.getElementById('nombre').value.trim();
   const usuario = document.getElementById('usuario').value.trim();
   const password = document.getElementById('password').value;
   const confirmarPassword = document.getElementById('confirmarPassword').value;
   const rol = document.getElementById('rol').value;
-
+  
+  // Validaciones
   if (password !== confirmarPassword) {
     mostrarMensaje('❌ Las contraseñas no coinciden', 'error');
     return;
   }
+  
   if (password.length < 6) {
     mostrarMensaje('❌ La contraseña debe tener al menos 6 caracteres', 'error');
     return;
   }
+  
   if (usuario.length < 4) {
     mostrarMensaje('❌ El usuario debe tener al menos 4 caracteres', 'error');
     return;
   }
-
+  
+  // Verificar si el usuario ya existe
   const existe = await usuarioExiste(usuario);
   if (existe) {
     mostrarMensaje('❌ El nombre de usuario ya está en uso', 'error');
     return;
   }
-
+  
+  // Crear objeto usuario
   const nuevoUsuario = {
     id: generarId(),
     usuario: usuario,
@@ -167,11 +180,17 @@ registroForm.addEventListener('submit', async (e) => {
     nombre: nombre,
     rol: rol
   };
-
+  
+  // Registrar usuario
   const registrado = await registrarUsuario(nuevoUsuario);
+  
   if (registrado) {
     mostrarMensaje('✅ Usuario registrado exitosamente', 'exito');
+    
+    // Actualizar tabla
     await mostrarUsuarios();
+    
+    // Cerrar modal después de 1.5 segundos
     setTimeout(() => {
       cerrarModal();
     }, 1500);
@@ -198,5 +217,6 @@ function cerrarSesion() {
 document.addEventListener('DOMContentLoaded', () => {
   verificarSesion();
   mostrarUsuarios();
+  
   document.getElementById('btnCerrarSesion').addEventListener('click', cerrarSesion);
 });
