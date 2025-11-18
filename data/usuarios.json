@@ -1,1 +1,25 @@
-[]
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "usuario": "admin",
+      "password": "admin123",
+      "nombre": "Administrador",
+      "rol": "admin"
+    },
+    {
+      "id": 2,
+      "usuario": "usuario1",
+      "password": "pass123",
+      "nombre": "Juan Pérez",
+      "rol": "usuario"
+    },
+    {
+      "id": 3,
+      "usuario": "maria",
+      "password": "maria456",
+      "nombre": "María García",
+      "rol": "usuario"
+    }
+  ]
+}

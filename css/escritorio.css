@@ -1,0 +1,65 @@
+:root {
+  --bg: #0f172a;
+  --card: #111827;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --primary: #3b82f6;
+  --accent: #8b5cf6;
+  --success: #10b981;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: system-ui, Segoe UI, Roboto, Arial;
+  background: radial-gradient(900px 520px at 70% -10%, #111827 0%, #0f172a 45%, #0b1220 100%);
+  color: var(--text);
+}
+
+.escritorio-container { min-height: 100vh; }
+.header {
+  background: rgba(17,24,39,.7); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(148,163,184,.2);
+  position: sticky; top: 0; z-index: 10;
+}
+.header-content {
+  max-width: 1100px; margin: 0 auto; padding: 18px 22px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.user-info { display: flex; gap: 12px; align-items: center; }
+.user-role { padding: 6px 10px; border-radius: 999px; background: rgba(59,130,246,.18); color: #93c5fd; font-size: 12px; }
+
+.btn-logout, .btn-back, .btn-add {
+  padding: 8px 12px; border-radius: 10px; border: 1px solid rgba(148,163,184,.25);
+  background: #0b1220; color: var(--text); cursor: pointer; transition: border .2s, transform .06s;
+}
+.btn-add { border-color: rgba(16,185,129,.4); color: #86efac; }
+.btn-back { border-color: rgba(139,92,246,.4); color: #c4b5fd; }
+.btn-logout:hover, .btn-back:hover, .btn-add:hover { border-color: rgba(59,130,246,.5); }
+.btn-logout:active, .btn-back:active, .btn-add:active { transform: scale(0.98); }
+
+.main-content { max-width: 1100px; margin: 0 auto; padding: 22px; }
+.welcome-section h2 { margin: 0 0 4px; }
+.welcome-section p { margin: 0 0 18px; color: var(--muted); }
+
+.cards-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px; margin-bottom: 22px;
+}
+.card {
+  background: rgba(17,24,39,.6); border: 1px solid rgba(148,163,184,.18);
+  backdrop-filter: blur(6px); border-radius: 14px; padding: 16px; cursor: pointer;
+  transition: transform .06s, border .2s, box-shadow .2s;
+}
+.card:hover { border-color: rgba(59,130,246,.45); box-shadow: 0 10px 20px rgba(0,0,0,.3); }
+.card:active { transform: scale(0.99); }
+.card-icon { font-size: 26px; margin-bottom: 6px; }
+
+.session-info .info-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+.info-item {
+  background: rgba(17,24,39,.55); border: 1px solid rgba(148,163,184,.18);
+  border-radius: 12px; padding: 12px;
+}
+.info-item strong { color: var(--muted); font-weight: 600; }

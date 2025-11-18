@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Usuarios</title>
+  <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="../css/escritorio.css">
+  <link rel="stylesheet" href="../css/usuario.css">
+</head>
+<body>
+  <div class="escritorio-container">
+    <header class="header">
+      <div class="header-content">
+        <h1>👥 Gestión de Usuarios</h1>
+        <div class="user-info">
+          <button onclick="window.location.href='escritorio.html'" class="btn-back">← Volver</button>
+          <button id="btnAbrirModal" class="btn-add">+ Agregar Usuario</button>
+          <button id="btnCerrarSesion" class="btn-logout">Cerrar Sesión</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="usuarios-section">
+        <h2>Lista de Usuarios Registrados</h2>
+
+        <div class="usuarios-stats">
+          <div class="stat-card">
+            <h3 id="totalUsuarios">0</h3>
+            <p>Total Usuarios</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="totalAdmins">0</h3>
+            <p>Administradores</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="totalRegulares">0</h3>
+            <p>Usuarios Regulares</p>
+          </div>
+        </div>
+
+        <div class="tabla-container">
+          <table class="tabla-usuarios">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Origen</th>
+              </tr>
+            </thead>
+            <tbody id="tablaUsuariosBody">
+              <!-- Se llena con JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal para agregar usuario -->
+  <div id="modalRegistro" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>📝 Agregar Nuevo Usuario</h2>
+        <span class="close">&times;</span>
+      </div>
+
+      <form id="registroForm">
+        <div class="input-group">
+          <label for="nombre">Nombre Completo *</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+        </div>
+
+        <div class="input-group">
+          <label for="usuario">Usuario *</label>
+          <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario" required minlength="4">
+          <small>Mínimo 4 caracteres</small>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Contraseña *</label>
+          <input type="password" id="password" name="password" placeholder="Contraseña segura" required minlength="6">
+          <small>Mínimo 6 caracteres</small>
+        </div>
+
+        <div class="input-group">
+          <label for="confirmarPassword">Confirmar Contraseña *</label>
+          <input type="password" id="confirmarPassword" name="confirmarPassword" placeholder="Repite la contraseña" required>
+        </div>
+
+        <div class="input-group">
+          <label for="rol">Rol *</label>
+          <select id="rol" name="rol" required>
+            <option value="">Selecciona un rol</option>
+            <option value="usuario">Usuario</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+
+        <div id="mensaje" class="mensaje"></div>
+
+        <div class="modal-buttons">
+          <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
+          <button type="submit" class="btn-guardar">Guardar Usuario</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/usuario.js"></script>
+</body>
+</html>

@@ -1,1 +1,65 @@
-<h1>¡Bienvenido al Escritorio! 🎉</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Escritorio - Mi Proyecto</title>
+  <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="../css/escritorio.css">
+</head>
+<body>
+  <div class="escritorio-container">
+    <header class="header">
+      <div class="header-content">
+        <h1>📊 Panel de Control</h1>
+        <div class="user-info">
+          <span class="user-name">👤 <span id="nombreUsuario"></span></span>
+          <span class="user-role" id="rolUsuario"></span>
+          <button id="btnCerrarSesion" class="btn-logout">Cerrar Sesión</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="welcome-section">
+        <h2>¡Bienvenido, <span id="nombreUsuarioBienvenida"></span>! 🎉</h2>
+        <p>Has iniciado sesión correctamente en el sistema.</p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card" onclick="window.location.href='usuario.html'">
+          <div class="card-icon">👥</div>
+          <h3>Gestión de Usuarios</h3>
+          <p>Ver y administrar usuarios</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📈</div>
+          <h3>Estadísticas</h3>
+          <p>Ver reportes y análisis</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚙️</div>
+          <h3>Configuración</h3>
+          <p>Ajustes del sistema</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📁</div>
+          <h3>Archivos</h3>
+          <p>Gestión de documentos</p>
+        </div>
+      </div>
+
+      <div class="session-info">
+        <h3>Información de Sesión</h3>
+        <div class="info-grid">
+          <div class="info-item"><strong>Usuario:</strong> <span id="infoUsuario"></span></div>
+          <div class="info-item"><strong>Nombre completo:</strong> <span id="infoNombre"></span></div>
+          <div class="info-item"><strong>Rol:</strong> <span id="infoRol"></span></div>
+          <div class="info-item"><strong>ID:</strong> <span id="infoId"></span></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/escritorio.js"></script>
+</body>
+</html>
